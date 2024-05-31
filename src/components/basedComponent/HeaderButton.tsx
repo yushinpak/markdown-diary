@@ -6,7 +6,7 @@ interface HeaderButtonProps {
 }
 
 const StyledHeaderButton = styled.button<HeaderButtonProps>`
-padding: 10px 10px;
+padding: 0 10px;
 color: var(--color-white);
 // color: black;
 background-color: transparent;

@@ -6,11 +6,15 @@ const GlobalStyle = createGlobalStyle`
 ${reset}
 
 :root {
-  --font-size-sm-1: 1rem; //이거 폰트 몇임..?
-  --font-size-sm-2: 1rem; //이거 폰트 몇임..?
-  --font-size-md: 1rem;
-  --font-size-hd: 1rem; 
-  --font-size-title: 1rem;
+  --font-size-sm-1: 0.5rem; 
+  --font-size-sm-2: 0.75rem; 
+  --font-size-md1: 1rem; //16
+  --font-size-md2: 1.3rem;
+  --font-size-hd1: 1.5rem; 
+  --font-size-hd2: 2.0rem; 
+  --font-size-hd3: 2.8rem; 
+
+
 
   --font-weight-bold: 700;
   --font-weight-semibold: 600;
@@ -27,11 +31,11 @@ ${reset}
 }
 
 ::-webkit-scrollbar {
-  width: 15px; /* 스크롤바 넓이 */
+  width: 12px; /* 스크롤바 넓이 */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--default-scrollbar-color); /* 스크롤바 색상 설정 */
+  background: #F38996; /* 스크롤바 색상 설정 */
 }
 
 @font-face {

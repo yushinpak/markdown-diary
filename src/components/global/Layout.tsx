@@ -3,13 +3,15 @@ import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 
-import tempBackgroundImg from "./../../assets/defaultBackground_pink.jpeg";
+// import tempBackgroundImg from "./../../assets/defaultBackground_pink.jpeg";
 
 const LayoutContainer = styled.div`
+  // background-color: red; //추후 삭제 코드
   display: flex;
   flex-direction: column;
+  width: 100%;
   min-height: 100vh;
-  background-image: tempBackgroundImg;
+  // background-image: tempBackgroundImg;
 `;
 
 const Body = styled.div`
@@ -21,6 +23,11 @@ const Body = styled.div`
 `;
 
 const Main = styled.div`
+display: flex;
+flex-direction: column;
+  box-sizing: border-box;
+  padding: 50px 50px;
+  // background-color: red; //추후 삭제 코드
   width: 80vw;
   min-height: 80vh;
   background-color: var(--color-postbox);
