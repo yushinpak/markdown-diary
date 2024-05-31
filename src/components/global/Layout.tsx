@@ -16,22 +16,24 @@ const LayoutContainer = styled.div`
 
 const Body = styled.div`
   display: flex;
-  justify-content: center; // 중앙 정렬
+  justify-content: center; 
   align-items: center;
   min-height: 100vh;
   // background-color: skyblue; // 추후 삭제 코드
 `;
 
 const Main = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-sizing: border-box;
-  padding: 50px 50px;
-  // background-color: red; //추후 삭제 코드
+  padding: 10vh 10vw;
   width: 80vw;
   min-height: 80vh;
   background-color: var(--color-postbox);
+  // background-color: red; //추후 삭제 코드
   border: var(--color-point) solid 2px;
+  // white-space: pre-wrap; // 추후 제대로 작동하게 만들어야해
 `;
 
 interface LayoutProps {

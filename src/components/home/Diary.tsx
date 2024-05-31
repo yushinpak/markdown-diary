@@ -15,22 +15,24 @@ const DiaryContainer = styled.div`
   width: 100%;
   height: auto;
   color: var(--color-text);
-  line-height: 1.7;
+  line-height: var(--line-height-default);
   border-bottom: solid 2px var(--color-point);
 `;
 
 const H2 = styled.h2`
   font-size: var(--font-size-hd1);
-  font-weight: var(--font-weight-medium);
-  white-space: pre-wrap;
+  font-weight: var(--font-weight-bold);
+  // white-space: pre-wrap; //추후
 `;
 
 const Date = styled.p`
 margin: 5px 0;
+font-size: var(--font-size-sm2);
+font-weight: var(--font-weight-regular);
 `;
 
 const Content = styled.p`
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-md1);
   // white-space: pre-wrap; // 추후 - 줄바꿈 넣을까말까..?? 일단 지금은 빼는 걸로
   color: var(--text-color);

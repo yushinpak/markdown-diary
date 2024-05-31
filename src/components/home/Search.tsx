@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const Input = styled.input`
   margin: 0 7px;
-  padding: 12px 10px;
+  padding: 10px 10px;
   width: 20vw;
   color: black;
   background-color: transparent;
@@ -37,7 +37,7 @@ const Search: React.FC = () => {
           제목과 내용
         </option>
       </Select>
-      <Input />
+      <Input placeholder="검색어를 입력하세요"/>
       <Button>검색하다</Button>
     </Container>
   );

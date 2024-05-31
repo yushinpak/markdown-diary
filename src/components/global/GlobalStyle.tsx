@@ -6,15 +6,13 @@ const GlobalStyle = createGlobalStyle`
 ${reset}
 
 :root {
-  --font-size-sm-1: 0.5rem; 
-  --font-size-sm-2: 0.75rem; 
+  --font-size-sm1: 0.5rem; 
+  --font-size-sm2: 0.9rem; 
   --font-size-md1: 1rem; //16
   --font-size-md2: 1.3rem;
   --font-size-hd1: 1.5rem; 
   --font-size-hd2: 2.0rem; 
   --font-size-hd3: 2.8rem; 
-
-
 
   --font-weight-bold: 700;
   --font-weight-semibold: 600;
@@ -28,6 +26,9 @@ ${reset}
   --color-logo: #FDFDF0;
   // --color-logo: #FDFDF0; // 흰색으로 변경될 가능성 있음
   --color-scrollbar: grey;
+
+  --line-height-default: 1.7;
+  
 }
 
 ::-webkit-scrollbar {
