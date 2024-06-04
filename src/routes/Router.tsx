@@ -20,7 +20,7 @@ const AppRouter = () => {
         <Route path="/diary-information" element={<Layout component={DiaryInformation} />} />
         <Route path="/diary-editor" element={<Layout component={DiaryEditor} />} />
         {/* 뷰어는 세부적으로 좀 더 자세하게 숫자도 쓰고 해야댕 */}
-        <Route path="/diary-viewer" element={<Layout component={DiaryViewer} />} />
+        <Route path="/:title" element={<Layout component={DiaryViewer} />} />
         <Route path="/register" element={<Layout component={Register} />} />
 
       </Routes>

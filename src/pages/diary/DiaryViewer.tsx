@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 // 컴포넌트
 import Button from "../../components/basedComponent/Button";
 import DiaryMover from "../../components/diary/DiaryMover";
 
-// 임시 데이터
-import { tempTitle, tempContent, tempDate } from "../../../tempData";
+// 임시 상수
+import { API_URL } from "../../../constants/defaultFile";
 
-interface DiaryViewerProps {
-  // 추후 그냥 diary props와 합
-  // 추후 다 필수 값으로 변경
-  title?: string;
-  date?: string; // 추후 알아보고 타입 변경. string인지 아닌지 제대로 모르겠음
-  content?: string;
-}
+// 타입
+import { DiaryItem } from "../home/Home";
+
+// util 함수
+import removeExtension from "../../../utils/removeExtension";
+import changeTimeForm from "../../../utils/changeTimeForm";
 
 const ViewerContainer = styled.div`
   display: flex;
@@ -58,14 +59,37 @@ const Content = styled.pre`
   font-weight: var(--font-weight-medium);
 `;
 
-const DiaryViewer: React.FC<DiaryViewerProps> = ({title, date, content}) => {
+const DiaryViewer: React.FC<DiaryItem> = () => {
+  const [diary, setDiary] = useState<DiaryItem>([]); // 추후 이거 배열인지 string인지 모르겠음
+  const { title } = useParams<{title: string}>();
 
+const fetchDiary = async () => {
+  try {
+    const response = await axios.get(`${API_URL}${title}`);
+    const diary = response.data;
+
+    const refinedDiary = {
+      title: diary.title,
+      content: diary.content,
+      createdAt: changeTimeForm(diary.createdAt),
+    }
+
+    setDiary(refinedDiary);
+
+  } catch (err) {
+    console.error("일기 하나 불러오기 실패", err);
+  }
+}
+
+useEffect(() => {
+  fetchDiary();
+}, [])
 
   return (
     <ViewerContainer>
-      <Title>{tempTitle}</Title>
-      <Date>{tempDate}</Date>
-      <Content>{tempContent}</Content>
+      <Title>{diary.title}</Title>
+      <Date>{diary.createdAt}</Date>
+      <Content>{diary.content}</Content>
 
       <ButtonContainer>
         <Button>글 수정하기</Button>

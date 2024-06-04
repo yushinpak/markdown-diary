@@ -8,11 +8,19 @@ import Button from "../../components/basedComponent/Button";
 import Diary from "../../components/home/Diary";
 import Search from "../../components/home/Search";
 
-// 임시 데이터
-// import { tempTitle, tempContent, tempDate } from "../../../tempData";
-
 // 임시 상수
 import { API_URL } from "../../../constants/defaultFile";
+
+// util 함수
+import removeExtension from "../../../utils/removeExtension";
+import changeTimeForm from "../../../utils/changeTimeForm";
+
+// 타입 정의 -> 추후 다른 폴더로 옮기기
+export interface DiaryItem {
+  title: string;
+  content: string;
+  createdAt: string;
+}
 
 // styled-components
 const HomeContainer = styled.div`
@@ -26,18 +34,12 @@ const OptionContainer = styled.div`
   justify-content: space-between;
 `;
 
-  interface DiaryItem {
-    title: string;
-    content: string;
-    createdAt : string;
-  }
 
 
 const Home: React.FC = () => {
   const [diaryList, setDiaryList] = useState<DiaryItem[]>([]);
 
-
-  // 일기 목록 불러오기
+  // 일기 전체 목록 불러오기
   const fetchDiaryList = async () => {
     try {
       // 일기 목록 가져오기
@@ -46,14 +48,22 @@ const Home: React.FC = () => {
 
       // 일기 목록 시간순 정렬
       const sortedDiaryList = DiaryList.sort((a: DiaryItem, b: DiaryItem) => {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       });
 
-      // 일기 이름에서 md 제거 
-      // 시간 조정하는 함수
-      setDiaryList(sortedDiaryList);
+      // 일기 이름에서 md 제거, 시간 형식 바꾸기
+      const refinedDiaryList = sortedDiaryList.map((diary: DiaryItem) => {
+        return {
+          title: removeExtension(diary.title),
+          content: diary.content,
+          createdAt: changeTimeForm(diary.createdAt),
+        };
+      });
 
-
+      //
+      setDiaryList(refinedDiaryList);
     } catch (err) {
       console.error("일기 불러오기 실패");
     }
@@ -75,6 +85,7 @@ const Home: React.FC = () => {
           title={diary.title}
           content={diary.content}
           date={diary.createdAt}
+          to={diary.title}
         />
       ))}
     </HomeContainer>

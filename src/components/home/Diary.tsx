@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface DiaryProps {
   // 추후 다 필수 값으로 변경
   title?: string;
-  date?: string; // 추후 알아보고 타입 변경. string인지 아닌지 제대로 모르겠음
+  date?: string; 
   content?: string;
   to?: string;
 }
@@ -30,9 +30,9 @@ const H2 = styled.h2`
 `;
 
 const Date = styled.p`
-margin: 5px 0;
-font-size: var(--font-size-sm2);
-font-weight: var(--font-weight-regular);
+  margin: 5px 0;
+  font-size: var(--font-size-sm2);
+  font-weight: var(--font-weight-regular);
 `;
 
 const Content = styled.p`
@@ -49,11 +49,11 @@ function trimmedContent(content: string): string {
   return trimmedContent;
 }
 
-const Diary: React.FC<DiaryProps> = ({ title, date, content }) => {
+const Diary: React.FC<DiaryProps> = ({ title, date, content, to}) => {
   const testContent = trimmedContent(content || "");
 
   return (
-    <DiaryContainer to="">
+    <DiaryContainer to={to}>
       <H2>{title}</H2>
       <Date>{date}</Date>
       {/* <Content>{content}</Content> */}
