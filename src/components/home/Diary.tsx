@@ -1,13 +1,15 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 interface DiaryProps {
   // 추후 다 필수 값으로 변경
   title?: string;
   date?: string; // 추후 알아보고 타입 변경. string인지 아닌지 제대로 모르겠음
   content?: string;
+  to?: string;
 }
 
-const DiaryContainer = styled.div`
+const DiaryContainer = styled(Link)`
   padding: 10px 0;
   margin: 30px 0;
   display: flex;
@@ -17,6 +19,8 @@ const DiaryContainer = styled.div`
   color: var(--color-text);
   line-height: var(--line-height-default);
   border-bottom: solid 2px var(--color-point);
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 const H2 = styled.h2`
@@ -49,7 +53,7 @@ const Diary: React.FC<DiaryProps> = ({ title, date, content }) => {
   const testContent = trimmedContent(content || "");
 
   return (
-    <DiaryContainer>
+    <DiaryContainer to="">
       <H2>{title}</H2>
       <Date>{date}</Date>
       {/* <Content>{content}</Content> */}
