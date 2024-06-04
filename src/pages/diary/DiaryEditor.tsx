@@ -43,7 +43,7 @@ const Content = styled.textarea`
   // 초기값에 따른 높이 조절은 코드를 통해 해야함
   font-size: var(--font-size-md1);
   font-weight: var(--font-weight-medium); //추후! 이거 좀 이상한 것 같음
-  min-height: 90vh;
+  min-height: 90vh; // 추후 이 부분 때문에 박스 정렬 틀어짐
   height: 100vh; // 추후 코드로 auto가 되도록 조정
   white-space: pre-wrap; // 추후 더 상위 컴포넌트에서 조정할 수 있도록 수정
   line-height: var(--line-height-default);

@@ -23,8 +23,7 @@ ${reset}
   --color-text: black;
   --color-point: #F38996;
   --color-postbox: #FDFDF0;
-  --color-logo: #FDFDF0;
-  // --color-logo: #FDFDF0; // 흰색으로 변경될 가능성 있음
+  --color-logo: #FDFDF0; // 흰색으로 변경될 가능성 있음
   --color-scrollbar: grey;
 
   --line-height-default: 1.7;
