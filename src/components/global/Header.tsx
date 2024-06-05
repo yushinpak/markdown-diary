@@ -10,7 +10,7 @@ const HeaderContainer = styled.div`
   padding: 3vh 8vh;
   color: var(--color-white);
   height: 30vh;
-  background-color: pink; // 추후 삭제 코드
+  // background-color: pink; // 추후 삭제 코드
 `;
 
 const Title = styled(Link)`

@@ -25,6 +25,7 @@ ${reset}
   --color-postbox: #FDFDF0;
   --color-logo: #FDFDF0; // 흰색으로 변경될 가능성 있음
   --color-scrollbar: grey;
+  --color-grey: grey;
 
   --line-height-default: 1.7;
   

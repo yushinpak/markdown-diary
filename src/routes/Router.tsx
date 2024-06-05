@@ -10,6 +10,7 @@ import DiaryViewer from "../pages/diary/DiaryViewer";
 import DiaryEditor from "../pages/diary/DiaryEditor";
 import DiaryInformation from "../pages/diaryInformation/DiaryInformation";
 import Register from "../pages/register/Register";
+import DiaryWriter from "../pages/diary/DiaryWriter";
 
 const AppRouter = () => {
   return (
@@ -19,7 +20,8 @@ const AppRouter = () => {
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/diary-information" element={<Layout component={DiaryInformation} />} />
         <Route path="/diary-editor" element={<Layout component={DiaryEditor} />} />
-        {/* 뷰어는 세부적으로 좀 더 자세하게 숫자도 쓰고 해야댕 */}
+        <Route path="/diary-writer" element={<Layout component={DiaryWriter} />} />
+        {/* <Route path="/diary-editor/:title" element={<Layout component={DiaryEditor} />} /> */}
         <Route path="/:title" element={<Layout component={DiaryViewer} />} />
         <Route path="/register" element={<Layout component={Register} />} />
 

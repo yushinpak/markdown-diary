@@ -14,7 +14,6 @@ import { API_URL } from "../../../constants/defaultFile";
 import { DiaryItem } from "../home/Home";
 
 // util 함수
-import removeExtension from "../../../utils/removeExtension";
 import changeTimeForm from "../../../utils/changeTimeForm";
 
 const ViewerContainer = styled.div`

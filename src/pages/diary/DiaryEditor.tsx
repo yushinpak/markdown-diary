@@ -7,13 +7,9 @@ import Button from "../../components/basedComponent/Button";
 // 임시 데이터
 import { tempTitle, tempContent } from "../../../tempData";
 
-interface DiaryViewerProps {
-  // 추후 그냥 diary props와 합
-  // 추후 다 필수 값으로 변경
-  title?: string;
-  date?: string; // 추후 알아보고 타입 변경. string인지 아닌지 제대로 모르겠음
-  content?: string;
-}
+// 타입
+import { DiaryItem } from "../home/Home";
+
 
 const EditorContainer = styled.div`
   display: flex;
@@ -51,7 +47,8 @@ const Content = styled.textarea`
   background-color: transparent;
 `;
 
-const DiaryEditor: React.FC<DiaryViewerProps> = ({ title, date, content }) => {
+const DiaryEditor: React.FC<DiaryItem> = () => {
+  
   return (
     <EditorContainer>
       <Title value={tempTitle} />

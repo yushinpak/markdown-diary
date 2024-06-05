@@ -77,7 +77,7 @@ const Home: React.FC = () => {
     <HomeContainer>
       <OptionContainer>
         <Search />
-        <Button>새로 쓰다</Button>
+        <Button to="diary-writer">새로 쓰다</Button>
       </OptionContainer>
       {diaryList.map((diary, index) => (
         <Diary

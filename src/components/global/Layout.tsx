@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 
-// import tempBackgroundImg from "./../../assets/defaultBackground_pink.jpeg";
+import tempBackgroundImg from "./../../assets/defaultBackground_pink.jpeg";
 
 const LayoutContainer = styled.div`
   // background-color: red; //추후 삭제 코드
@@ -11,14 +11,13 @@ const LayoutContainer = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  // background-image: tempBackgroundImg;
+  background-image: url(${tempBackgroundImg});
 `;
 
 const Body = styled.div`
   display: flex;
   justify-content: center; 
   align-items: center;
-  min-height: 100vh;
   // background-color: skyblue; // 추후 삭제 코드
 `;
 

@@ -10,8 +10,7 @@ interface DiaryProps {
 }
 
 const DiaryContainer = styled(Link)`
-  padding: 10px 0;
-  margin: 30px 0;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,6 +20,7 @@ const DiaryContainer = styled(Link)`
   border-bottom: solid 2px var(--color-point);
   cursor: pointer;
   text-decoration: none;
+  // background-color: red; //추후 삭제 코드
 `;
 
 const H2 = styled.h2`
@@ -33,6 +33,7 @@ const Date = styled.p`
   margin: 5px 0;
   font-size: var(--font-size-sm2);
   font-weight: var(--font-weight-regular);
+  color: var(--color-grey);
 `;
 
 const Content = styled.p`
@@ -43,7 +44,7 @@ const Content = styled.p`
 `;
 
 function trimmedContent(content: string): string {
-  let trimmedContent = content.split(" ").slice(0, 50).join(" ");
+  let trimmedContent = content.split(" ").slice(0, 35).join(" ");
   trimmedContent += "···";
 
   return trimmedContent;

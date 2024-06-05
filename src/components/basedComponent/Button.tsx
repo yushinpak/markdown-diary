@@ -5,7 +5,7 @@ interface ButtonProps {
   children?: React.ReactNode;
   margin?: string;
   padding?: string;
-  onclick?: () => void;
+  onClick?: () => void;
   to?: string;
 }
 
@@ -27,12 +27,12 @@ const StyledButton = styled(Link)<ButtonProps>`
 const Button: React.FC<ButtonProps> = ({
   margin,
   padding,
-  onclick,
+  onClick,
   children,
   to,
 }) => {
   return (
-    <StyledButton to={to} margin={margin} padding={padding} onclick={onclick}>
+    <StyledButton to={to} margin={margin} padding={padding} onClick={onClick}>
       {children}
     </StyledButton>
   );
