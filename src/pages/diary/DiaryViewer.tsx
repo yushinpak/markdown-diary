@@ -61,6 +61,7 @@ const Content = styled.pre`
 const DiaryViewer: React.FC<DiaryItem> = () => {
   const [diary, setDiary] = useState<DiaryItem>([]); // 추후 이거 배열인지 string인지 모르겠음
   const { title } = useParams<{title: string}>();
+  const encodedTitle = encodeURIComponent(title);
 
 const fetchDiary = async () => {
   try {
@@ -80,6 +81,28 @@ const fetchDiary = async () => {
   }
 }
 
+// const handleEdit = () => {
+
+// };
+
+const handleDelete = async () => {
+  // 글 삭제하기 API 연결
+    try {
+      await axios.delete(`${API_URL}${encodedTitle}`); 
+      console.log("삭제 완료 버튼"); // 추후 삭제
+
+      // 일기 작성이 완료되었다는 알럿창
+      if(confirm("일기를 정말로 삭제하시겠습니까?")) {
+        alert("일기 삭제가 완료되었습니다");
+
+      }
+      // 첫화면으로 리다이렉트
+      window.location.href = `http://localhost:5173/`; //추후 방법 없는지 찾기
+    } catch (err) {
+      console.error("일기를 삭제하는데 실패했습니다.", err);
+    }
+  };
+
 useEffect(() => {
   fetchDiary();
 }, [])
@@ -92,7 +115,7 @@ useEffect(() => {
 
       <ButtonContainer>
         <Button>글 수정하기</Button>
-        <Button>글 삭제하기</Button>
+        <Button onClick={handleDelete}>글 삭제하기</Button>
       </ButtonContainer>
       <DiaryMoverContainer>
         <DiaryMover>이전 일기</DiaryMover>

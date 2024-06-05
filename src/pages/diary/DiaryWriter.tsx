@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { debounce } from "lodash";
 
@@ -52,7 +51,6 @@ const Content = styled.textarea`
 `;
 
 const DiaryWriter: React.FC<DiaryItem> = () => {
-  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
