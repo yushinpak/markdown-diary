@@ -19,7 +19,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/diary-information" element={<Layout component={DiaryInformation} />} />
-        <Route path="/diary-editor" element={<Layout component={DiaryEditor} />} />
+        <Route path="/diary-editor/:title" element={<Layout component={DiaryEditor} />} />
         <Route path="/diary-writer" element={<Layout component={DiaryWriter} />} />
         {/* <Route path="/diary-editor/:title" element={<Layout component={DiaryEditor} />} /> */}
         <Route path="/:title" element={<Layout component={DiaryViewer} />} />

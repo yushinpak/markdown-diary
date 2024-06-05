@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 // 컴포넌트
 import Button from "../../components/basedComponent/Button";
 
-// 임시 데이터
-import { tempTitle, tempContent } from "../../../tempData";
+// 임시 상수
+import { API_URL } from "../../../constants/defaultFile";
 
 // 타입
 import { DiaryItem } from "../home/Home";
-
 
 const EditorContainer = styled.div`
   display: flex;
@@ -25,14 +26,22 @@ const EditorContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+
+  & > * {
+    box-sizing: border-box;
+    margin: 0 4px;
+    padding: 10px 7px;
+  }
 `;
 
 const Title = styled.input`
   font-size: var(--font-size-hd2);
-  font-weight: var(--font-weight-bold); // 추후 - input에서의 weight와  h2에서의 weight이 왜 다를까..?
+  font-weight: var(
+    --font-weight-bold
+  ); // 추후 - input에서의 weight와  h2에서의 weight이 왜 다를까..?
   background-color: transparent;
   border: none;
-
 `;
 
 const Content = styled.textarea`
@@ -48,13 +57,63 @@ const Content = styled.textarea`
 `;
 
 const DiaryEditor: React.FC<DiaryItem> = () => {
-  
+  const [diary, setDiary] = useState<DiaryItem>([]);
+  const { title } = useParams<{ title: string }>();
+  let encodedTitle = encodeURIComponent(title);
+
+  // 글 조회하기 API
+  const fetchDiary = async () => {
+    try {
+      const response = await axios.get(`${API_URL}${title}`);
+      const diary = response.data;
+
+      const refinedDiary = {
+        title: diary.title,
+        content: diary.content,
+        createdAt: diary.createdAt,
+      };
+      setDiary(refinedDiary);
+    } catch (err) {
+      console.error("일기 하나 불러오기 실패", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDiary();
+  }, []);
+
+  // 글 수정하기
+  const handleEdit = async () => {
+    try {
+      await axios.put(`${API_URL}${encodedTitle}`, {
+        title: diary.title,
+        content: diary.content,
+      });
+      alert("일기 수정이 완료되었습니다");
+
+      encodedTitle = diary.title;
+
+      // 작성된 일기 화면으로 리다이렉트
+      window.location.href = `http://localhost:5173/${encodedTitle}`; //추후 방법 없는지 찾기
+    } catch (err) {
+      console.error("일기 수정이 실패했습니다");
+    }
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDiary({ ...diary, title: e.target.value });
+  };
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDiary({ ...diary, content: e.target.value });
+  };
+
   return (
     <EditorContainer>
-      <Title value={tempTitle} />
-      <Content>{tempContent}</Content>
+      <Title value={diary.title} onChange={handleTitleChange} />
+      <Content value={diary.content} onChange={handleContentChange} />
       <ButtonContainer>
-        <Button>고쳐쓰기 완료</Button>
+        <Button onClick={handleEdit}>고쳐쓰기 완료</Button>
       </ButtonContainer>
     </EditorContainer>
   );

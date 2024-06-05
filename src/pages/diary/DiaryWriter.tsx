@@ -27,6 +27,13 @@ const EditorContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+
+  & > * {
+    box-sizing: border-box;
+    margin: 0 4px;
+    padding: 10px 7px;
+  }
 `;
 
 const Title = styled.input`
