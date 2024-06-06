@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // 컴포넌트
 import Button from "../../components/basedComponent/Button";
@@ -35,6 +36,7 @@ const OptionContainer = styled.div`
 `;
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   const [diaryList, setDiaryList] = useState<DiaryItem[]>([]);
 
   // 일기 전체 목록 불러오기
@@ -71,11 +73,15 @@ const Home: React.FC = () => {
     fetchDiaryList();
   }, []);
 
+  const handleWriteButtonClick = () => {
+    navigate("diary-writer");
+  };
+
   return (
     <HomeContainer>
       <OptionContainer>
         <Search />
-        <Button to="diary-writer">새로 쓰다</Button>
+        <Button onClick={handleWriteButtonClick}>새로 쓰다</Button>
       </OptionContainer>
       {diaryList.map((diary, index) => (
         <Diary
@@ -83,7 +89,6 @@ const Home: React.FC = () => {
           title={diary.title}
           content={diary.content}
           createdAt={diary.createdAt}
-          to={diary.title}
         />
       ))}
     </HomeContainer>

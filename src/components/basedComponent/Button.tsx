@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 interface ButtonProps {
   children: React.ReactNode;
   margin?: string;
   padding?: string;
   onClick?: () => void;
-  to?: string;
 }
 
-const StyledButton = styled(Link)<ButtonProps>`
+const StyledButton = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   margin: ${(props) => props.margin || "0"};
@@ -29,10 +27,9 @@ const Button: React.FC<ButtonProps> = ({
   padding,
   onClick,
   children,
-  to,
 }) => {
   return (
-    <StyledButton to={to} margin={margin} padding={padding} onClick={onClick}>
+    <StyledButton margin={margin} padding={padding} onClick={onClick}>
       {children}
     </StyledButton>
   );
