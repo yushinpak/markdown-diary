@@ -18,6 +18,8 @@ const Title = styled(Link)`
   color: var(--color-white);
   font-weight: var(--font-weight-bold);
   text-decoration: none;
+  font-family: "YESMyoungjo-Regular", sans-serif;
+
 `;
 
 const ButtonContainer = styled.div`

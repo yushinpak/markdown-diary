@@ -19,7 +19,7 @@ import changeTimeForm from "../../../utils/changeTimeForm";
 export interface DiaryItem {
   title: string;
   content: string;
-  createdAt: string;
+  readonly createdAt: string;
 }
 
 // styled-components
@@ -33,8 +33,6 @@ const OptionContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-
-
 
 const Home: React.FC = () => {
   const [diaryList, setDiaryList] = useState<DiaryItem[]>([]);
@@ -84,7 +82,7 @@ const Home: React.FC = () => {
           key={index}
           title={diary.title}
           content={diary.content}
-          date={diary.createdAt}
+          createdAt={diary.createdAt}
           to={diary.title}
         />
       ))}

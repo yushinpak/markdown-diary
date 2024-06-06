@@ -34,8 +34,7 @@ const ButtonContainer = styled.div`
 
   & > * {
     box-sizing: border-box;
-    margin: 0 4px;
-    padding: 10px 7px;
+    margin: 0 0 0 6px;
   }
 `;
 
@@ -66,9 +65,9 @@ const Content = styled.pre`
 `;
 
 const DiaryViewer: React.FC<DiaryItem> = () => {
-  const [diary, setDiary] = useState<DiaryItem>([]); // 추후 이거 배열인지 string인지 모르겠음
+  const [diary, setDiary] = useState<DiaryItem | undefined>(undefined);
   const { title } = useParams<{ title: string }>();
-  const encodedTitle = encodeURIComponent(title);
+  const encodedTitle = title? encodeURIComponent(title) : "";
 
   useEffect(() => {
     const fetchDiary = async () => {
@@ -88,7 +87,7 @@ const DiaryViewer: React.FC<DiaryItem> = () => {
     };
 
     fetchDiary();
-  }, []);
+  }, [title]);
 
   const handleEdit = () => {
     // 글 수정 페이지로 이동
@@ -114,9 +113,15 @@ const DiaryViewer: React.FC<DiaryItem> = () => {
 
   return (
     <ViewerContainer>
-      <Title>{diary.title}</Title>
-      <Date>{diary.createdAt}</Date>
-      <Content>{diary.content}</Content>
+    {diary ? (
+      <>
+        <Title>{diary.title}</Title>
+        <Date>{diary.createdAt}</Date>
+        <Content>{diary.content}</Content>
+      </>
+    ) : (
+      <div>일기를 로딩중입니다</div> 
+    )}
 
       <ButtonContainer>
         <Button onClick={handleEdit}>수정하기</Button>

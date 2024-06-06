@@ -24,7 +24,6 @@ const AppRouter = () => {
         {/* <Route path="/diary-editor/:title" element={<Layout component={DiaryEditor} />} /> */}
         <Route path="/:title" element={<Layout component={DiaryViewer} />} />
         <Route path="/register" element={<Layout component={Register} />} />
-
       </Routes>
     </Router>
   );

@@ -31,7 +31,6 @@ const ButtonContainer = styled.div`
   & > * {
     box-sizing: border-box;
     margin: 0 4px;
-    padding: 10px 7px;
   }
 `;
 
@@ -57,61 +56,70 @@ const Content = styled.textarea`
 `;
 
 const DiaryEditor: React.FC<DiaryItem> = () => {
-  const [diary, setDiary] = useState<DiaryItem>([]);
+  const [diary, setDiary] = useState<DiaryItem | undefined>(undefined); // 추후 이거 배열인지 string인지 모르겠음
   const { title } = useParams<{ title: string }>();
-  let encodedTitle = encodeURIComponent(title);
+  let encodedTitle = title ? encodeURIComponent(title) : "";
 
   // 글 조회하기 API
-  const fetchDiary = async () => {
-    try {
-      const response = await axios.get(`${API_URL}${title}`);
-      const diary = response.data;
-
-      const refinedDiary = {
-        title: diary.title,
-        content: diary.content,
-        createdAt: diary.createdAt,
-      };
-      setDiary(refinedDiary);
-    } catch (err) {
-      console.error("일기 하나 불러오기 실패", err);
-    }
-  };
-
   useEffect(() => {
+    const fetchDiary = async () => {
+      try {
+        const response = await axios.get(`${API_URL}${title}`);
+        const diary = response.data;
+
+        const refinedDiary = {
+          title: diary.title,
+          content: diary.content,
+          createdAt: diary.createdAt,
+        };
+        setDiary(refinedDiary);
+      } catch (err) {
+        console.error("일기 하나 불러오기 실패", err);
+      }
+    };
+
     fetchDiary();
-  }, []);
+  }, [title]);
 
   // 글 수정하기
   const handleEdit = async () => {
-    try {
-      await axios.put(`${API_URL}${encodedTitle}`, {
-        title: diary.title,
-        content: diary.content,
-      });
-      alert("일기 수정이 완료되었습니다");
-
-      encodedTitle = diary.title;
-
-      // 작성된 일기 화면으로 리다이렉트
-      window.location.href = `http://localhost:5173/${encodedTitle}`; //추후 방법 없는지 찾기
-    } catch (err) {
-      console.error("일기 수정이 실패했습니다");
+    if (diary) {
+      try {
+        await axios.put(`${API_URL}${encodedTitle}`, {
+          title: diary.title,
+          content: diary.content,
+        });
+        alert("일기 수정이 완료되었습니다");
+  
+        encodedTitle = diary.title;
+  
+        // 작성된 일기 화면으로 리다이렉트
+        window.location.href = `http://localhost:5173/${encodedTitle}`; //추후 방법 없는지 찾기
+      } catch (err) {
+        console.error("일기 수정이 실패했습니다");
+      }
     }
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDiary({ ...diary, title: e.target.value });
+    setDiary({ title: e.target.value, content: diary?.content || "", createdAt: diary?.createdAt || "", });
   };
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDiary({ ...diary, content: e.target.value });
+    setDiary({ title: diary?.title || "", content: e.target.value || "", createdAt: diary?.createdAt || "", });
   };
 
   return (
     <EditorContainer>
-      <Title value={diary.title} onChange={handleTitleChange} />
-      <Content value={diary.content} onChange={handleContentChange} />
+      {diary ? (
+        <>
+          <Title value={diary.title} onChange={handleTitleChange} />
+          <Content value={diary.content} onChange={handleContentChange} />
+        </>
+      ) : (
+        <div>작성된 일기를 로딩중입니다</div>
+      )}
+
       <ButtonContainer>
         <Button onClick={handleEdit}>고쳐쓰기 완료</Button>
       </ButtonContainer>

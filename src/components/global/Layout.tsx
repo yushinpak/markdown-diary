@@ -16,7 +16,7 @@ const LayoutContainer = styled.div`
 
 const Body = styled.div`
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   // background-color: skyblue; // 추후 삭제 코드
 `;
@@ -35,12 +35,12 @@ const Main = styled.div`
   // white-space: pre-wrap; // 추후 제대로 작동하게 만들어야해
 `;
 
-interface LayoutProps {
-  component: React.ComponentType;
+interface LayoutProps{
+  component: React.ComponentType<any>;
   // backgroundImage: string || Image={}; // url인데 어떻게 해야할지 잘 모르겠다!
 }
 
-const Layout: React.FC<LayoutProps> = ({
+const Layout : React.FC<LayoutProps> = ({
   component: Component,
   // backgroundImage,
 }) => {

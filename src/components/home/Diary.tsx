@@ -1,15 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-interface DiaryProps {
-  // 추후 다 필수 값으로 변경
-  title?: string;
-  date?: string; 
-  content?: string;
-  to?: string;
-}
+import { DiaryItem } from "../../pages/home/Home";
 
-const DiaryContainer = styled(Link)`
+const DiaryContainer = styled.div`
   padding: 30px 0;
   display: flex;
   flex-direction: column;
@@ -43,22 +37,30 @@ const Content = styled.p`
   color: var(--text-color);
 `;
 
-function trimmedContent(content: string): string {
-  let trimmedContent = content.split(" ").slice(0, 35).join(" ");
-  trimmedContent += "···";
 
-  return trimmedContent;
-}
 
-const Diary: React.FC<DiaryProps> = ({ title, date, content, to}) => {
-  const testContent = trimmedContent(content || "");
+
+const Diary: React.FC<DiaryItem> = ({ title, createdAt, content, }) => {
+  const navigate = useNavigate();
+
+  function ContentTrimmer (content: string): string {
+    let result = content.split(" ").slice(0, 35).join(" ");
+    result += "···";
+  
+    return result;
+  }
+  
+  const trimmedContent = ContentTrimmer(content || "");
+
+  const handleDiaryClick = () => {
+    navigate(`${title}`)
+  }
 
   return (
-    <DiaryContainer to={to}>
+    <DiaryContainer onClick={handleDiaryClick}>
       <H2>{title}</H2>
-      <Date>{date}</Date>
-      {/* <Content>{content}</Content> */}
-      <Content>{testContent}</Content>
+      <Date>{createdAt}</Date>
+      <Content>{trimmedContent}</Content>
     </DiaryContainer>
   );
 };
